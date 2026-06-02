@@ -82,7 +82,7 @@ public class PaymentService {
 
         Optional<Transaction> optionalTransaction = transactionRepository.findById(request.getTransactionId());
 
-        if (!optionalTransaction.isPresent()) {
+        if (optionalTransaction.isEmpty()) {
             return buildErrorResponse(request.getTransactionId(), "Transaction not found");
         }
 
@@ -118,7 +118,7 @@ public class PaymentService {
 
         Optional<Transaction> optionalTransaction = transactionRepository.findById(request.getTransactionId());
 
-        if (!optionalTransaction.isPresent()) {
+        if (optionalTransaction.isEmpty()) {
             return buildErrorResponse(request.getTransactionId(), "Transaction not found");
         }
 
@@ -211,7 +211,7 @@ public class PaymentService {
 
     private String generateAuthCode() {
         // Generate 6-digit authorization code
-        return String.format("%06d", random.nextInt(1000000));
+        return "%06d".formatted(random.nextInt(1000000));
     }
 
     private PaymentResponse buildErrorResponse(String transactionId, String message) {

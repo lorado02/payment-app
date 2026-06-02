@@ -81,7 +81,7 @@ public class PaymentController {
         try {
             Optional<Transaction> transaction = paymentService.getTransaction(id);
 
-            if (!transaction.isPresent()) {
+            if (transaction.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .body(buildErrorResponse("Transaction not found"));
             }
